@@ -7,12 +7,25 @@ class TweetsController < ApplicationController
   def index
 
     if user_signed_in?
-      @tweets = Tweet.all.where("user_id=?",current_user.id).order("created_at DESC")
+   
+      @followed_user = FollowUser.where("follower = ?",current_user.id).map{ |x| x.following}
+      @followed_user << current_user.id
+      @followed_user = @followed_user.uniq
+   
+      @tweets = Tweet.all.where("user_id in (?)",@followed_user).order("created_at DESC")
+      
+      #@tweets = current_user.tweets.order("created_at DESC")
+      
       @tweet = Tweet.new
+      
+      @users = User.all.where("id not in (?)",@followed_user)
     else
       @tweets = Tweet.all.order("created_at DESC")
       @tweet = Tweet.new
     end
+    
+    
+    
   end
 
   # GET /tweets/1

@@ -4,6 +4,15 @@
       
        <%= render 'feed' %>
        
+       <% if user_signed_in? %>
+       <%= render 'who_to_follow' %>
+       <% end %>
     </div>
   </div>
 </section>
+
+#added_follow_sectio_in_index
+#added_new_partial_who_to_follow
+#crete a new controller user
+#rails g controller follow_users
+#rails g model Follow_user
