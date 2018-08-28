@@ -2,29 +2,34 @@
 	<nav class="panel">
 		<p class="panel-heading">Who to Follow</p>
 	
-	<% if @users %>
-	<% @users.each do |user| %>
-	
-	    <div class="panel-block">
-		<article class="media">
-			<div class="media-left">
-				<figure class="image is-32x32">
-					<img src="https://bulma.io/images/placeholders/64x64.png">
-				</figure>
-			</div>
-			<div class="media-content">
-				<div class="content">
-					<p>
-						<strong><%= user.name %></strong>
-						<small><%= user.username %></small>
-						<%= button_to 'Follow', follow_users_path, method: :post,params: { following: user.id }%>
-					</p>
+	<% if @users != [] %>
+		<% @users.each do |user| %>
+		
+		    <div class="panel-block">
+			<article class="media">
+				<div class="media-left">
+					<figure class="image is-32x32">
+						<img src="https://bulma.io/images/placeholders/64x64.png">
+					</figure>
 				</div>
-			</div>
-		</article>
-	    </div>
-	
-	<% end %>
+				<div class="media-content">
+					<div class="content">
+						<p>
+							<strong><%= user.name %></strong>
+							<small><%= user.username %></small>
+							<%= button_to 'Follow', follow_users_path, method: :post,params: { following: user.id }%>
+						</p>
+					</div>
+				</div>
+			</article>
+		    </div>
+		
+		<% end %>
+
+	<%else%>
+	<div class="panel-block">
+		<h3> No users availabe to follow. Sign up to create more users. </h3>
+	</div>
 	<% end %>
 		
 	</nav>
